@@ -1,13 +1,39 @@
 package main
 
-func main(){
-	// TODO:init config:clenaenv
+import (
+	"log/slog"
+	"os"
+	"url-shortener/internal/config"
+)
 
-	//TODO:init logger:slog
+const (
+	envLocal = "local"
+	envDev   = "develop"
+	envProd  = "prod"
+)
 
-	//TODO: init storage:sqllite
+func main() {
+	cfg := config.MustLoad()
+
+	log := setupLogger(cfg.Env)
+
+	//TODO: init storage mongoDB
 
 	//TODO:init router:chi,render
 
 	//TODO: run server
+}
+
+func setupLogger(env string) *slog.Logger {
+	var log *slog.Logger
+
+	switch env {
+	case envLocal:
+		log = slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
+	case envDev:
+		log = slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
+	case envProd:
+		log = slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}))
+	}
+	return log
 }
