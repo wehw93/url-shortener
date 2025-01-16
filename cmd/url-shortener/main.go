@@ -4,6 +4,11 @@ import (
 	"log/slog"
 	"os"
 	"url-shortener/internal/config"
+	"url-shortener/internal/lib/logger/sl"
+	"url-shortener/internal/storage/sqllite"
+
+	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi/v5"
 )
 
 const (
@@ -17,9 +22,17 @@ func main() {
 
 	log := setupLogger(cfg.Env)
 
-	//TODO: init storage mongoDB
+	storage, err := sqllite.New(cfg.StoragePath)
+	if err != nil {
+		log.Error("failrd to init storage", sl.Err(err))
+		os.Exit(1)
+	}
 
-	//TODO:init router:chi,render
+
+	router:=chi.NewRouter()
+
+	router.Use(middleware.RequestID)
+	router.Use(middleware.Logger)
 
 	//TODO: run server
 }
@@ -37,3 +50,4 @@ func setupLogger(env string) *slog.Logger {
 	}
 	return log
 }
+
