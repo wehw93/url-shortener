@@ -4,6 +4,7 @@ import (
 	"log/slog"
 	"os"
 	"url-shortener/internal/config"
+	mvLogger "url-shortener/internal/http-server/middleware/logger"
 	"url-shortener/internal/lib/logger/sl"
 	"url-shortener/internal/storage/sqllite"
 
@@ -28,12 +29,13 @@ func main() {
 		os.Exit(1)
 	}
 
-
-	router:=chi.NewRouter()
-
+	router := chi.NewRouter()
+// stady
 	router.Use(middleware.RequestID)
 	router.Use(middleware.Logger)
-
+	router.Use(mvLogger.New(log))
+	router.Use(middleware.Recoverer)
+	router.Use(middleware.URLFormat)
 	//TODO: run server
 }
 
@@ -50,4 +52,3 @@ func setupLogger(env string) *slog.Logger {
 	}
 	return log
 }
-
