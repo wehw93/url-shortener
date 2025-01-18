@@ -13,6 +13,7 @@ import (
 	resp "url-shortener/internal/lib/api/response"
 	"url-shortener/internal/lib/logger/sl"
 	"url-shortener/internal/lib/random"
+	"url-shortener/internal/storage"
 )
 
 const aliasLength = 6
@@ -81,13 +82,26 @@ func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
 
 		id, err := urlSaver.SaveURL(req.URL, alias)
 
-		if err != nil {
+		if errors.Is(err, storage.ErrURLExist) {
+			log.Info("url already exists", slog.String("url", req.URL))
 
-			log.Info("url already exist", slog.String("url", req.URL))
+			render.JSON(w, r, resp.Error("url already exist"))
+
+			return
+		}
+		if err != nil {
+			log.Error("failed to add url", sl.Err(err))
 
 			render.JSON(w, r, resp.Error("failed to add url"))
 			return
 		}
+
+		log.Info("url added", slog.Int64("id", id))
+
+		render.JSON(w,r,Response{
+			Response: resp.OK(),
+			Alias: alias,
+		})
 
 	}
 }
