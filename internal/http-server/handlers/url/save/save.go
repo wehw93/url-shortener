@@ -29,7 +29,7 @@ type Response struct {
 }
 
 type URLSaver interface {
-	SaveURL(urlToSave string, alias string) (int64, error)
+	SaveURL(urlToSave string, alias string) error
 }
 
 func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
@@ -80,7 +80,7 @@ func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
 
 		}
 
-		id, err := urlSaver.SaveURL(req.URL, alias)
+		err = urlSaver.SaveURL(req.URL, alias)
 
 		if errors.Is(err, storage.ErrURLExist) {
 			log.Info("url already exists", slog.String("url", req.URL))
@@ -96,11 +96,11 @@ func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
 			return
 		}
 
-		log.Info("url added", slog.Int64("id", id))
+		log.Info("url added")
 
-		render.JSON(w,r,Response{
+		render.JSON(w, r, Response{
 			Response: resp.OK(),
-			Alias: alias,
+			Alias:    alias,
 		})
 
 	}

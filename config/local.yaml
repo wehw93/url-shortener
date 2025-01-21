@@ -1,8 +1,14 @@
 env: "local" # local,dev,prod
-storage_path: "./storage.db"
 http_server:
   addres: "localhost:8080"
   timeout: 4s
   idle_timeout: 60s
   user: "myuser"
   password: "mypass"
+storage:
+  type: "SQLite"
+  SQLite:
+    path: "./storage.db"
+  
+  MongoDB: 
+    uri: "mongodb://admin:my_password@localhost:27017/url-shortener"
