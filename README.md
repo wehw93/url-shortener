@@ -1,68 +1,68 @@
-# URL-Shortener: A Fast and Reliable URL Shortening Service 🚀  
+# URL-Shortener: Быстрый и надежный сервис для сокращения URL 🚀  
 
-**URL-Shortener** is a powerful REST API service for managing short URLs. With this service, you can quickly create, delete, and redirect short links. Built with **Golang**, it ensures high performance and scalability.  
+**URL-Shortener** — это мощный REST API-сервис для управления короткими ссылками. С его помощью вы можете быстро создавать, удалять и редиректить короткие ссылки. Проект разработан на **Golang**, что гарантирует высокую производительность и масштабируемость.  
 
-## 🔧 Features  
-- **Modern Technologies**: Utilizes the lightweight HTTP router `go-chi/chi` for flexible and efficient routing.  
-- **Database Support**:  
-  - **SQLite**: Perfect for local development or lightweight use cases.  
-  - **MongoDB**: Ideal for distributed and scalable systems.  
-- **Docker-Compose**: Simplified environment setup using Docker Compose.  
-- **Config File**: YAML configuration support for easy and customizable settings.  
-- **Logging**: Integrated with `slog` for transparent activity tracking.  
-- **Thoroughly Tested**: All key components are covered with tests, ensuring reliability and production readiness.  
+## 🔧 Основные особенности  
+- **Современные технологии**: Используется легковесный HTTP-роутер `go-chi/chi`, обеспечивающий гибкость и скорость.  
+- **Поддержка баз данных**:  
+  - **SQLite**: Идеально подходит для локальной разработки или легких задач.  
+  - **MongoDB**: Подходит для распределенных и масштабируемых систем.  
+- **Docker-Compose**: Упрощенная настройка окружения с помощью Docker Compose.  
+- **Файл конфигурации**: Поддержка YAML для удобной настройки сервиса.  
+- **Логирование**: Интеграция с `slog` для прозрачного отслеживания работы.  
+- **Тестирование**: Ключевые компоненты покрыты тестами, что гарантирует надежность в продакшене.  
 
-## 📜 API Overview  
-- **POST /url**: Create a short URL.  
-- **GET /{alias}**: Redirect to the original URL.  
-- **DELETE /url/{alias}**: Delete a short URL.
+## 📜 API Обзор  
+- **POST /url**: Создать короткую ссылку.  
+- **GET /{alias}**: Редирект на оригинальную ссылку.  
+- **DELETE /url/{alias}**: Удалить короткую ссылку.  
 
-## Structure
+## 🗂️ Структура проекта  
+```plaintext
 ├── cmd
-│   └── url-shortener
-│       └── main.go
+│   └── url-shortener
+│       └── main.go
 ├── config
-│   └── local.yaml
+│   └── local.yaml
 ├── docker-compose.yml
 ├── go.mod
 ├── go.sum
 ├── internal
-│   ├── config
-│   │   └── config.go
-│   ├── http-server
-│   │   ├── handlers
-│   │   │   └── url
-│   │   │       ├── deleteURL
-│   │   │       │   └── deleteURL.go
-│   │   │       ├── redirect
-│   │   │       │   └── redirect.go
-│   │   │       └── save
-│   │   │           └── save.go
-│   │   └── middleware
-│   │       └── logger
-│   │           └── logger.go
-│   ├── lib
-│   │   ├── api
-│   │   │   ├── api.go
-│   │   │   └── response
-│   │   │       └── response.go
-│   │   ├── logger
-│   │   │   └── sl
-│   │   │       └── sl.go
-│   │   └── random
-│   │       ├── random.go
-│   │       └── random_test.go
-│   └── storage
-│       ├── mongo
-│       │   └── mongo.go
-│       ├── sqllite
-│       │   └── sqlite.go
-│       └── storage.go
+│   ├── config
+│   │   └── config.go
+│   ├── http-server
+│   │   ├── handlers
+│   │   │   └── url
+│   │   │       ├── deleteURL
+│   │   │       │   └── deleteURL.go
+│   │   │       ├── redirect
+│   │   │       │   └── redirect.go
+│   │   │       └── save
+│   │   │           └── save.go
+│   │   └── middleware
+│   │       └── logger
+│   │           └── logger.go
+│   ├── lib
+│   │   ├── api
+│   │   │   ├── api.go
+│   │   │   └── response
+│   │   │       └── response.go
+│   │   ├── logger
+│   │   │   └── sl
+│   │   │       └── sl.go
+│   │   └── random
+│   │       ├── random.go
+│   │       └── random_test.go
+│   └── storage
+│       ├── mongo
+│       │   └── mongo.go
+│       ├── sqlite
+│       │   └── sqlite.go
+│       └── storage.go
 ├── local.env
 ├── Makefile
 ├── README.md
 ├── storage.db
 ├── tests
-│   └── url_shortener_test.go
+│   └── url_shortener_test.go
 └── url-shortener
-
