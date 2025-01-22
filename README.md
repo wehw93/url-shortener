@@ -66,3 +66,15 @@
 ├── tests
 │   └── url_shortener_test.go
 └── url-shortener
+```
+##  Установка и запуск  
+
+Чтобы установить и запустить **URL-Shortener**, выполните следующие шаги:  
+
+### 1. Клонируйте репозиторий:  
+```bash
+git clone git@github.com:your-username/url-shortener.git  
+cd url-shortener  
+### 2. Установите зависимости:
+go mod tidy  
+
