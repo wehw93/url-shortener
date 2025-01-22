@@ -98,4 +98,22 @@ storage:
   MongoDB:
     uri: "mongodb://admin:my_password@localhost:27017/url-shortener"
 ```
+### 4. Запустите серверЖ
+```
+go run cmd/url-shortener/main.go  
+```
+### 5. Проверьте работу API:
+- Вы можете использовать curl или Postman для тестирования:
+- Создание короткой ссылки
+  ```
+  curl -X POST http://localhost:8080/url -u myuser:mypass -d '{"url": "https://github.com/wehw93", "alias": "my_github"}'
+  ```
+- Редирект по короткой ссылке:
+  ```
+  curl -X GET http://localhost:8080/my_github -u myuser:mypass
+  ```
+- Удаление короткой ссылки:
+  ```
+  curl -X DELETE http://localhost:8080/url/my_github -u myuser:mypass
+  ```
 
