@@ -74,7 +74,28 @@
 ### 1. Клонируйте репозиторий:  
 ```bash
 git clone git@github.com:your-username/url-shortener.git  
-cd url-shortener  
+cd url-shortener
+```  
 ### 2. Установите зависимости:
-go mod tidy  
+```
+go mod tidy
+```
+### 3. Настройте конфигурацию:
+ - Используйте файл ```config/local.yaml``` для конфигурации вашего запуска.
+ - Конфиг файл по умолчанию:
+```
+env: "local" # Возможные значения: local, dev, prod
+http_server:
+  address: "localhost:8080"
+  timeout: 4s
+  idle_timeout: 60s
+  user: "myuser"
+  password: "mypass"
+storage:
+  type: "SQLite" # Возможные значения: SQLite, MongoDB
+  SQLite:
+    path: "./storage.db"
+  MongoDB:
+    uri: "mongodb://admin:my_password@localhost:27017/url-shortener"
+```
 
