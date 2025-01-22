@@ -6,9 +6,9 @@ http_server:
   user: "myuser"
   password: "mypass"
 storage:
-  type: "SQLite"
+  type: "MongoDB"
   SQLite:
     path: "./storage.db"
   
   MongoDB: 
-    uri: "mongodb://admin:my_password@localhost:27017/url-shortener"
+    uri: "mongodb://@localhost:27017/url-shortener"
