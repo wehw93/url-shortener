@@ -15,4 +15,54 @@
 ## 📜 API Overview  
 - **POST /url**: Create a short URL.  
 - **GET /{alias}**: Redirect to the original URL.  
-- **DELETE /url/{alias}**: Delete a short URL.  
+- **DELETE /url/{alias}**: Delete a short URL.
+
+## Structure
+├── cmd
+│   └── url-shortener
+│       └── main.go
+├── config
+│   └── local.yaml
+├── docker-compose.yml
+├── go.mod
+├── go.sum
+├── internal
+│   ├── config
+│   │   └── config.go
+│   ├── http-server
+│   │   ├── handlers
+│   │   │   └── url
+│   │   │       ├── deleteURL
+│   │   │       │   └── deleteURL.go
+│   │   │       ├── redirect
+│   │   │       │   └── redirect.go
+│   │   │       └── save
+│   │   │           └── save.go
+│   │   └── middleware
+│   │       └── logger
+│   │           └── logger.go
+│   ├── lib
+│   │   ├── api
+│   │   │   ├── api.go
+│   │   │   └── response
+│   │   │       └── response.go
+│   │   ├── logger
+│   │   │   └── sl
+│   │   │       └── sl.go
+│   │   └── random
+│   │       ├── random.go
+│   │       └── random_test.go
+│   └── storage
+│       ├── mongo
+│       │   └── mongo.go
+│       ├── sqllite
+│       │   └── sqlite.go
+│       └── storage.go
+├── local.env
+├── Makefile
+├── README.md
+├── storage.db
+├── tests
+│   └── url_shortener_test.go
+└── url-shortener
+
