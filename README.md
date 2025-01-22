@@ -96,7 +96,7 @@ storage:
   SQLite:
     path: "./storage.db"
   MongoDB:
-    uri: "mongodb://admin:my_password@localhost:27017/url-shortener"
+    uri: "mongodb://@localhost:27017/url-shortener"
 ```
 ### 4. Запустите сервер:
 ```
